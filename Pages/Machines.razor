@@ -1,5 +1,73 @@
 @page "/machines"
 
-@code{
+@using BlazorTable
+@using Radzen
+@using RoyalstarAdminPanel.Models
+@using RoyalstarAdminPanel.Services
+@inject MachineService MachineService
+@inject NavigationManager NavigationManager
+@inject DialogService DialogService
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="mb-3 ">
+                <h1>Machine Page</h1>
+            </div>
+            <RadzenButton class="mb-3" Click=@newMachine Text="New Machine" /> 
+            <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" PageSize="5"
+                AllowPaging="true" AllowSorting="true" Data="@machines" TItem="Machine"
+                LogicalFilterOperator="LogicalFilterOperator.Or">
+                <Columns>
+                    <RadzenDataGridColumn TItem="Machine" Property="Id" Filterable="false" Title="ID" Frozen="true"
+                        Width="70px" />
+                    <RadzenDataGridColumn TItem="Machine" Property="Type" Title="Type" />
+                    <RadzenDataGridColumn TItem="Machine" Property="DeviceBarcodeNo" Title="Device Barcode No" />
+                    <RadzenDataGridColumn TItem="Machine" Property="DeviceOnOff" Title="Device On/Off" />
+                    <RadzenDataGridColumn TItem="Machine" Property="ActivePower" Title="Active Power" />
+                    <RadzenDataGridColumn TItem="Machine" Property="ApparentPower" Title="Apparent Power" />
+                    <RadzenDataGridColumn TItem="Machine" Title="Link" Sortable="false" Filterable="false"
+                        Width="200px">
+                        <Template Context="data">
+                            <RadzenButton Click=@(args => isClicked(data)) Text="Detail" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    IEnumerable<Machine> machines;
+    protected override async Task OnInitializedAsync()
+    {
+        machines = await MachineService.GetMachines();
+    }
+    public void isClicked(Machine machine)
+    {
+        NavigationManager.NavigateTo("/mainmachine/" + machine.DeviceBarcodeNo);
+    }
+    public void newMainMachine()
+    {
+        NavigationManager.NavigateTo("/createmain");
+    }
+    async Task newMachine( )
+    {
+        var result = await DialogService.OpenAsync("Create Machine", ds =>
+        @<div>
+            <p Style="margin-bottom: 1rem">Lütfen oluşturmak istediğiniz makinenin türünü seçiniz!</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <RadzenButton Text="Main" Click=newMainMachine Style="margin-bottom: 10px; width: 150px" />
+                    <RadzenButton Text="Solar" Style="margin-bottom: 10px; width: 150px"/>
+                    <RadzenButton Text="Genset" Style="margin-bottom: 10px; width: 150px"/>
+                </div>
+            </div>
+        </div>);
+    }
+
     
 }

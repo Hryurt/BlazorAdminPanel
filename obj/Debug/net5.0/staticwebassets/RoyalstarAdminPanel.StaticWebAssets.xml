@@ -1,4 +1,6 @@
 ﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="_content/MatBlazor" Path="C:\Users\HRYurt\.nuget\packages\matblazor\2.8.0\build\..\staticwebassets\" />
-  <ContentRoot BasePath="/" Path="C:\Users\HRYurt\Desktop\SWE\Blazor\RoyalstarAdminPanel\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="_content/BlazorTable" Path="C:\Users\aydin\.nuget\packages\blazortable\1.16.0\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/MatBlazor" Path="C:\Users\aydin\.nuget\packages\matblazor\2.8.0\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Radzen.Blazor" Path="C:\Users\aydin\.nuget\packages\radzen.blazor\3.9.4\build\..\staticwebassets\" />
+  <ContentRoot BasePath="/" Path="C:\Users\aydin\Desktop\HRYURT\RoyalstarAdminPanel\obj\Debug\net5.0\scopedcss\bundle\" />
 </StaticWebAssets>

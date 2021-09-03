@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RoyalstarAdminPanel.Data;
@@ -15,6 +16,9 @@ namespace RoyalstarAdminPanel.Services
         public async Task<User> LoginAsync(string username, string password)
         {
             var userFromDb = await _context.Users.FirstOrDefaultAsync(x => x.Username.ToLower() == username.ToLower());
+
+            IEnumerable<User> users;
+            users = _context.Users;
 
             if (userFromDb == null)
                 return null;

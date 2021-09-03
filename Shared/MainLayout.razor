@@ -4,26 +4,28 @@
 @inject NavigationManager NavigationManager
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <RadzenDialog/>
+    <AuthorizeView>
+        <Authorized>
+            <div class="sidebar">
+                <NavMenu />
+            </div>
 
-    <div class="main">
-        <div class="top-row px-4">
-            <AuthorizeView>
-                <Authorized>
+            <div class="main">
+                <div class="top-row px-4">
                     <a href="login" @onclick="Logout">Logout</a>
-                </Authorized>
-                <NotAuthorized>
-                    <a href="login">Login</a>
-                </NotAuthorized>
-            </AuthorizeView>
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
+                </div>
+                <div class="content px-4">
+                    @Body
+                </div>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="px-0">
+                @Body
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
 </div>
 
 @code {

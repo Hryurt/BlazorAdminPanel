@@ -1,0 +1,130 @@
+@page "/updatemain/{Id:int}"
+@using RoyalstarAdminPanel.Dtos
+@using RoyalstarAdminPanel.Services
+@using RoyalstarAdminPanel.Models
+@inject MachineService MachineService
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+
+<div class="card card-lg mb-5">
+    <div class="card-body">
+        <div class="text-center">
+            <h1>Update Main Machine</h1>
+            <p>Input required information to update main machine</p>
+        </div>
+        <EditForm Model="mainModel" OnValidSubmit="Success">
+            <DataAnnotationsValidator />
+            <ValidationSummary/>
+            <div class="form-group">
+                <label for="mainDeviceBarcodeNoInput" class="input-label text-capitalize">Device Barcode No</label>
+                <InputText type="number" class="form-control form-control-lg" autocomplete="off" tabindex="1"
+                    Placeholder="Device Barcode No" id="mainDeviceBarcodeNoInput" @bind-Value="@mainModel.DeviceBarcodeNo" />
+            </div>
+            <div class="form-group">
+                <label for="mainsActivePowerInput" class="input-label text-capitalize">Mains Active Power</label>
+                <InputText type="number" tabindex="2" class="form-control form-control-lg" Placeholder="Mains Active Power"
+                    id="mainsActivePowerInput" @bind-Value="@mainModel.MainsActivePower" />
+            </div>
+            <div class="form-group">
+                <label for="mainsApparentPowerInput" class="input-label text-capitalize">Mains Apparent Power</label>
+                <InputText type="number" tabindex="2" class="form-control form-control-lg" Placeholder="Mains Apparent Power"
+                    id="mainsApparentPowerInput" @bind-Value="@mainModel.MainsApparentPower" />
+            </div>
+            <div class="form-group">
+                <label for="mainsCurrentInput" class="input-label text-capitalize">Mains Current</label>
+                <InputText type="number" tabindex="3" class="form-control form-control-lg" Placeholder="Mains Current"
+                    id="mainsCurrentInput" @bind-Value="@mainModel.MainsCurrent" />
+            </div>
+            <div class="form-group">
+                <label for="mainsDeviceOnOffInput" class="input-label text-capitalize">Mains Device On/Off</label>
+                <RadzenCheckBox id="mainsDeviceOnOffInput" class="form-control form-control-lg" @bind-Value=@mainModel.MainsDeviceOnOff  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="mainsFrequenceInput" class="input-label text-capitalize">Mains Frequence</label>
+                <InputText type="number" tabindex="4" class="form-control form-control-lg" Placeholder="Mains Frequence"
+                    id="mainsFrequenceInput" @bind-Value="@mainModel.MainsFrequence" />
+            </div>
+            <div class="form-group">
+                <label for="mainsBreakerOffInput" class="input-label text-capitalize">Mains Breaker Off</label>
+                <RadzenCheckBox id="mainsBreakerOffInput" class="form-control form-control-lg" @bind-Value=@mainModel.MainsBreakerOff  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="mainsBreakerOnInput" class="input-label text-capitalize">Mains Breaker On</label>
+                <RadzenCheckBox id="mainsBreakerOnInput" class="form-control form-control-lg" @bind-Value=@mainModel.MainsBreakerOn  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="mainsModeManuelInput" class="input-label text-capitalize">Mains Mode Manuel</label>
+                <RadzenCheckBox id="mainsModeManuelInput" class="form-control form-control-lg" @bind-Value=@mainModel.MainsModeManuel  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="mainsModeSemiInput" class="input-label text-capitalize">Mains Mode Semi</label>
+                <RadzenCheckBox id="mainsModeSemiInput" class="form-control form-control-lg" @bind-Value=@mainModel.MainsModeSemi  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="mainsStatusOffInput" class="input-label text-capitalize">Mains Status Off</label>
+                <RadzenCheckBox id="mainsStatusOffInput" class="form-control form-control-lg" @bind-Value=@mainModel.MainsStatusOff  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="mainsStatusOnInput" class="input-label text-capitalize">Mains Status On</label>
+                <RadzenCheckBox id="mainsStatusOnInput" class="form-control form-control-lg" @bind-Value=@mainModel.MainsStatusOn  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="mainsReactivePowerInput" class="input-label text-capitalize">Mains Reactive Power</label>
+                <InputText type="number" tabindex="5" class="form-control form-control-lg" Placeholder="Mains Reactive Power"
+                    id="mainsReactivePowerInput" @bind-Value="@mainModel.MainsReactivePower" />
+            </div>
+            <div class="form-group">
+                <label for="mainsVoltInput" class="input-label text-capitalize">Mains Volt</label>
+                <InputText type="number" tabindex="6" class="form-control form-control-lg" Placeholder="Mains Volt"
+                    id="mainsVoltInput" @bind-Value="@mainModel.MainsVolt" />
+            </div>
+            <div class="form-group">
+                <label for="writeCommandInput" class="input-label text-capitalize">Write Command</label>
+                <RadzenCheckBox id="writeCommandInput" class="form-control form-control-lg" @bind-Value=@mainModel.WriteCommand  TValue="bool"/>
+            </div>
+            <div class="form-group">
+                <label for="deviceAddedInput" class="input-label text-capitalize">device Added</label>
+                <InputText type="number" tabindex="7" class="form-control form-control-lg" Placeholder="Device Added"
+                    id="deviceAddedInput" @bind-Value="@mainModel.deviceAdded" />
+            </div>
+            <button type="submit" class="btn btn-lg btn-block btn-primary">Update</button>
+        </EditForm>
+        <button @onclick="Delete" class="btn btn-lg btn-block btn-danger mt-3">Delete</button>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+    private MainMachineBindingModel mainModel = new();
+    protected override async Task OnInitializedAsync()
+    {
+        mainModel = await MachineService.GetMainMachineBindingModel(Id);
+    }
+    async Task Success()
+    {
+        var machineFromService = await MachineService.UpdateMainMachine(mainModel, Id);
+        if (machineFromService == false)
+        {
+            await JS.InvokeAsync<object>("alert", "Unsuccessful update!");
+        }
+        else
+        {
+            await JS.InvokeAsync<object>("alert", "Successful update!");
+            NavigationManager.NavigateTo("/mainmachine/"+ mainModel.DeviceBarcodeNo);
+        }
+    }
+    async Task Delete()
+    {
+        var machineFromService = await MachineService.DeleteMainMachine(Id);
+        if (machineFromService == false)
+        {
+            await JS.InvokeAsync<object>("alert", "Unsuccessful deletion!");
+        }
+        else
+        {
+            await JS.InvokeAsync<object>("alert", "Successful deletion!");
+            NavigationManager.NavigateTo("/machines/");
+        }
+    }
+}

@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RoyalstarAdminPanel.Data;
 using RoyalstarAdminPanel.Services;
+using BlazorTable;
+using Radzen;
 
 namespace RoyalstarAdminPanel
 {
@@ -35,8 +37,11 @@ namespace RoyalstarAdminPanel
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<AuthService>();
+            services.AddTransient<MachineService>();
             services.AddMatBlazor();
+            services.AddBlazorTable();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services.AddScoped<DialogService>();
             services.AddBlazoredLocalStorage();
             services.AddDbContext<DataContext>(opt =>
             {

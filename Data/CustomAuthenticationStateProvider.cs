@@ -16,7 +16,11 @@ namespace RoyalstarAdminPanel.Data
 
         public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var identity = new ClaimsIdentity();
+            /* var identity = new ClaimsIdentity(); */
+            var identity = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, "username"),
+                }, "Fake authentication type");
 
             var user = new ClaimsPrincipal(identity);
 

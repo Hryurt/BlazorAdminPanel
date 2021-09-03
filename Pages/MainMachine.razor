@@ -1,0 +1,168 @@
+@page "/mainmachine/{Id:int}"
+@using RoyalstarAdminPanel.Services
+@using RoyalstarAdminPanel.Models
+@inject MachineService MachineService
+@inject NavigationManager NavigationManager
+
+
+<div class="text-center">
+    <h1>Main Machine</h1>
+    <RadzenButton class="mb-3" Click=@updateMainMachine Text="Update Machine" /> 
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-lg mb-5">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p>Summary</p>
+                        <p>Barcode No: @mainMachine.DeviceBarcodeNo</p>
+                        <p>Type: Main</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Mains Device On/Off: @mainMachine.MainsDeviceOnOff</p>
+                        <p>Mains Breaker Off: @mainMachine.MainsBreakerOff</p>
+                        <p>Mains Breaker On: @mainMachine.MainsBreakerOn</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Mains Mode Manuel: @mainMachine.MainsModeManuel</p>
+                        <p>Mains Mode Semi: @mainMachine.MainsModeSemi</p>
+                        <p>Mains Status Off: @mainMachine.MainsStatusOff</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>Mains Status On: @mainMachine.MainsStatusOn</p>
+                        <p>Write Command: @mainMachine.WriteCommand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-lg mb-5">
+            <div class="card-body">
+                <RadzenRadialGauge Style="width: 100%; height: 300px;">
+                    <RadzenRadialGaugeScale StartAngle="-150" EndAngle="150" Step="100" Min="0"
+                        Max="@mainMachine.MainsActivePower" TickPosition=@GaugeTickPosition.Inside>
+                        <RadzenRadialGaugeScalePointer Value="@mainMachine.MainsApparentPower" Length="0.6"
+                            ShowValue="true">
+                            <Template Context="pointer">
+                                <h4>
+                                    @mainMachine.MainsApparentPower V
+                                </h4>
+                            </Template>
+                        </RadzenRadialGaugeScalePointer>
+                        <RadzenRadialGaugeScaleRange From="0" To="@green" Fill="green" />
+                        <RadzenRadialGaugeScaleRange From="@green" To="@orange" Fill="orange" />
+                        <RadzenRadialGaugeScaleRange From="@orange" To="@red" Fill="red" />
+                    </RadzenRadialGaugeScale>
+                </RadzenRadialGauge>
+                <div class="text-center">
+                    <p>Mains Apparent Power</p>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-lg mb-5">
+            <div class="card-body">
+                <RadzenRadialGauge Style="width: 100%; height: 300px;">
+                    <RadzenRadialGaugeScale StartAngle="-150" EndAngle="150" Step="20" Min="0"
+                        Max="200" TickPosition=@GaugeTickPosition.Inside>
+                        <RadzenRadialGaugeScalePointer Value="@mainMachine.MainsCurrent" Length="0.6"
+                            ShowValue="true">
+                            <Template Context="pointer">
+                                <h4>
+                                    @mainMachine.MainsCurrent I
+                                </h4>
+                            </Template>
+                        </RadzenRadialGaugeScalePointer>
+                        <RadzenRadialGaugeScaleRange From="0" To="100" Fill="green" />
+                        <RadzenRadialGaugeScaleRange From="100" To="150" Fill="orange" />
+                        <RadzenRadialGaugeScaleRange From="150" To="200" Fill="red" />
+                    </RadzenRadialGaugeScale>
+                </RadzenRadialGauge>
+                <div class="text-center">
+                    <p>Mains Current</p>
+                </div>       
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-lg mb-5">
+            <div class="card-body">
+                <RadzenRadialGauge Style="width: 100%; height: 300px;">
+                    <RadzenRadialGaugeScale StartAngle="-150" EndAngle="150" Step="1000" Min="0"
+                        Max="10000" TickPosition=@GaugeTickPosition.Inside>
+                        <RadzenRadialGaugeScalePointer Value="@mainMachine.MainsFrequence" Length="0.6"
+                            ShowValue="true">
+                            <Template Context="pointer">
+                                <h4>
+                                    @mainMachine.MainsFrequence Hz
+                                </h4>
+                            </Template>
+                        </RadzenRadialGaugeScalePointer>
+                        <RadzenRadialGaugeScaleRange From="0" To="5000" Fill="green" />
+                        <RadzenRadialGaugeScaleRange From="5000" To="7500" Fill="orange" />
+                        <RadzenRadialGaugeScaleRange From="7500" To="10000" Fill="red" />
+                    </RadzenRadialGaugeScale>
+                </RadzenRadialGauge>
+                <div class="text-center">
+                    <p>Mains Frequence</p>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-lg mb-5">
+            <div class="card-body">
+                <RadzenRadialGauge Style="width: 100%; height: 300px;">
+                    <RadzenRadialGaugeScale StartAngle="-150" EndAngle="150" Step="1000" Min="0"
+                        Max="10000" TickPosition=@GaugeTickPosition.Inside>
+                        <RadzenRadialGaugeScalePointer Value="@mainMachine.MainsReactivePower" Length="0.6"
+                            ShowValue="true">
+                            <Template Context="pointer">
+                                <h4>
+                                    @mainMachine.MainsReactivePower V
+                                </h4>
+                            </Template>
+                        </RadzenRadialGaugeScalePointer>
+                        <RadzenRadialGaugeScaleRange From="0" To="1000" Fill="green" />
+                        <RadzenRadialGaugeScaleRange From="1000" To="5500" Fill="orange" />
+                        <RadzenRadialGaugeScaleRange From="5500" To="10000" Fill="red" />
+                    </RadzenRadialGaugeScale>
+                </RadzenRadialGauge>
+                <div class="text-center">
+                    <p>Mains Reactive Power</p>
+                </div>       
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    public RoyalstarAdminPanel.Models.MainMachine mainMachine = new();
+    public int green;
+    public int orange;
+    public int red;
+
+    protected override async Task OnInitializedAsync()
+    {
+        mainMachine = await MachineService.GetMainMachine(Id);
+        green = mainMachine.MainsActivePower / 3;
+        orange = mainMachine.MainsActivePower * 2 / 3;
+        red = mainMachine.MainsActivePower;
+    }
+
+    public void updateMainMachine()
+    {
+        NavigationManager.NavigateTo("/updatemain/" + Id.ToString());
+    }
+}
