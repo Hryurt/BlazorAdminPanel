@@ -12,12 +12,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RoyalstarAdminPanel.Data;
-using RoyalstarAdminPanel.Services;
+using AdminPanel.Data;
+using AdminPanel.Services;
 using BlazorTable;
 using Radzen;
 
-namespace RoyalstarAdminPanel
+namespace AdminPanel
 {
     public class Startup
     {
@@ -35,7 +35,6 @@ namespace RoyalstarAdminPanel
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddServerSideBlazor().AddCircuitOptions(options => {  options.DetailedErrors = true; });
             services.AddTransient<AuthService>();
             services.AddTransient<MachineService>();
@@ -44,8 +43,10 @@ namespace RoyalstarAdminPanel
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddScoped<DialogService>();
             services.AddBlazoredLocalStorage();
-            services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(opt => 
+            {
+                opt.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

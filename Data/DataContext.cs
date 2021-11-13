@@ -1,8 +1,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using RoyalstarAdminPanel.Models;
+using AdminPanel.Models;
 
-namespace RoyalstarAdminPanel.Data
+namespace AdminPanel.Data
 {
     public class DataContext : DbContext
     {

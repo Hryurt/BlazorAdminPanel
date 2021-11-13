@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RoyalstarAdminPanel.Data;
-using RoyalstarAdminPanel.Dtos;
-using RoyalstarAdminPanel.Models;
+using AdminPanel.Data;
+using AdminPanel.Dtos;
+using AdminPanel.Models;
 using System;
 
-namespace RoyalstarAdminPanel.Services
+namespace AdminPanel.Services
 {
     public class MachineService
     {

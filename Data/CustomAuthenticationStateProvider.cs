@@ -1,10 +1,10 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Authorization;
-using RoyalstarAdminPanel.Models;
-using RoyalstarAdminPanel.Services;
+using AdminPanel.Models;
+using AdminPanel.Services;
 
-namespace RoyalstarAdminPanel.Data
+namespace AdminPanel.Data
 {
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {

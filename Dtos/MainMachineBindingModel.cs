@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace RoyalstarAdminPanel.Dtos
+namespace AdminPanel.Dtos
 {
     public class MainMachineBindingModel
     {

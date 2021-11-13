@@ -1,6 +1,6 @@
 @page "/mainmachine/{Id:int}"
-@using RoyalstarAdminPanel.Services
-@using RoyalstarAdminPanel.Models
+@using AdminPanel.Services
+@using AdminPanel.Models
 @inject MachineService MachineService
 @inject NavigationManager NavigationManager
 
@@ -148,7 +148,7 @@
 @code {
     [Parameter]
     public int Id { get; set; }
-    public RoyalstarAdminPanel.Models.MainMachine mainMachine = new();
+    public AdminPanel.Models.MainMachine mainMachine = new();
     public int green;
     public int orange;
     public int red;

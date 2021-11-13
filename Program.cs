@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace RoyalstarAdminPanel
+namespace AdminPanel
 {
     public class Program
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace RoyalstarAdminPanel.Models
+namespace AdminPanel.Models
 {
     public class MainMachine
     {

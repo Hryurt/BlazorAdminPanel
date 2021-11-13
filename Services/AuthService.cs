@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using RoyalstarAdminPanel.Data;
-using RoyalstarAdminPanel.Models;
+using AdminPanel.Data;
+using AdminPanel.Models;
 
-namespace RoyalstarAdminPanel.Services
+namespace AdminPanel.Services
 {
     public class AuthService
     {

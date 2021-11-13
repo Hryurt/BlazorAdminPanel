@@ -2,8 +2,8 @@
 
 @using BlazorTable
 @using Radzen
-@using RoyalstarAdminPanel.Models
-@using RoyalstarAdminPanel.Services
+@using AdminPanel.Models
+@using AdminPanel.Services
 @inject MachineService MachineService
 @inject NavigationManager NavigationManager
 @inject DialogService DialogService
@@ -58,7 +58,7 @@
     {
         var result = await DialogService.OpenAsync("Create Machine", ds =>
         @<div>
-            <p Style="margin-bottom: 1rem">Lütfen oluşturmak istediğiniz makinenin türünü seçiniz!</p>
+            <p Style="margin-bottom: 1rem">Please select the machine kind that you want to create!</p>
             <div class="row">
                 <div class="col-md-12">
                     <RadzenButton Text="Main" Click=newMainMachine Style="margin-bottom: 10px; width: 150px" />
