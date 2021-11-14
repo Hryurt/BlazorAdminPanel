@@ -5,7 +5,7 @@ It is a Blazor server app implemented for the demonstration of an admin panel of
 ## Before Running
 
 Before installing this program, follow the instructions below. (If you have already installed these requirements, disregard this part.)
-* Install .NET SDK 3.1+ [here](https://dotnet.microsoft.com/download)
+* Install .NET SDK 6.0 [here](https://dotnet.microsoft.com/download)
 
 ## How To Run
 
